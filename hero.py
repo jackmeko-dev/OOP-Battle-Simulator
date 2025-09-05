@@ -16,7 +16,7 @@ class Hero:
     def __init__(self, name):
         self.name=name
         self.health=200
-        self.attack_power = random.randint(20,25)
+        self.attack_power = random.randint(40,45)
     
 
     def strike(self):
@@ -29,6 +29,7 @@ class Hero:
         # TODO We should prevent health from going into the NEGATIVE
         if self.health< 0:
             self.health=0
+        print(f"{self.name} takes {damage} damage. Health is now {self.health}.")
     def is_alive(self):
         return self.health > 0
 
