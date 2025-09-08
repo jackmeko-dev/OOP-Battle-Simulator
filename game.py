@@ -44,7 +44,7 @@ def main():
     # Determine outcome
     if hero.is_alive():
         print(f"\nThe hero has defeated all the goblins! ༼ ᕤ◕◡◕ ༽ᕤ")
-        hero.health=200
+        hero.health=hero.health+200
         print(f"\nThe hero has drank a health potion, and is back at full health")
     else:
         print(f"\nThe hero has been defeated. Game Over. (｡•́︿•̀｡)")
@@ -52,17 +52,14 @@ def main():
     print(f"\nTotal goblins defeated: {defeated_goblins} / {len(goblins)}")
     print(f"Total rounds fought: {rounds}")
     print(f"\nTotal damage dealt: {total_damage}")
-    
+
     if hero.is_alive():
         print("The deadly Smaug has flew into the arena!")
         boss=Boss("Smaug")
+        rounds=0
         while hero.is_alive() and boss.is_alive():
-            rounds=0
-            damage=hero.strike()
-            boss.take_damage(damage)
-            damage=boss
             damage=boss.attack()
-            hero.receive_damage(damage)
+            hero.health-=damage
             if rounds > 10:
                 boss.health=0
                 print("Smaug has been struck in the heart!")
@@ -70,8 +67,9 @@ def main():
     if hero.is_alive():
         print(f"\nThe hero has defeated SMAUG!!! ༼ ᕤ◕◡◕ ༽ᕤ")
     else:
-        print(f"\nThe hero has lost to the legendary SMAUG")       
-            
+        print(f"\nThe hero has lost to the legendary SMAUG :(")    
+
+    print(f"Total rounds fought: {rounds}")    
     # Final tally of goblins defeated
 
 
