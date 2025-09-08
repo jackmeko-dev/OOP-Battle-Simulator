@@ -1,6 +1,6 @@
 import random
-
-class Goblin:
+from enemy import Enemy
+class Goblin(Enemy):
     """
     This is our goblin blueprint 
     
@@ -9,10 +9,11 @@ class Goblin:
         health: The current health value 
         attack_power: How much health will be drained from opponent if hit
     """
-    def __init__(self, name):
+    def __init__(self, name,color):
         self.name = name
         self.health = 100
         self.attack_power = random.randint(5, 15)
+        self.color = color
 
     def attack(self):
         return random.randint(1, self.attack_power)

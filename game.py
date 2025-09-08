@@ -1,7 +1,7 @@
 import random
 from goblin import Goblin
 from hero import Hero
-
+from boss import Boss
 def main():
     print("Welcome to the Battle Arena!")
     print("༼ ᓄºل͟º ༽ᓄ   ᕦ(ò_óˇ)ᕤ")
@@ -10,7 +10,7 @@ def main():
     hero = Hero("Golden Knight")
 
     # Create goblins ༼ ºل͟º ༽ ༼ ºل͟º ༽ ༼ ºل͟º ༽
-    goblins = [Goblin(f"Goblin {i+1}") for i in range(3)]
+    goblins = [Goblin(f"Goblin {i+1}", "orange") for i in range(3)]
 
     # Keep track of how many goblins were defeated
     defeated_goblins = 0
@@ -33,7 +33,7 @@ def main():
         if not target_goblin.is_alive():
             defeated_goblins += 1
             print(f"{target_goblin.name} has been defeated!")
-            
+
         # Goblins' turn to attack
         for goblin in goblins:
             if goblin.is_alive():
@@ -44,13 +44,36 @@ def main():
     # Determine outcome
     if hero.is_alive():
         print(f"\nThe hero has defeated all the goblins! ༼ ᕤ◕◡◕ ༽ᕤ")
+        hero.health=200
+        print(f"\nThe hero has drank a health potion, and is back at full health")
     else:
         print(f"\nThe hero has been defeated. Game Over. (｡•́︿•̀｡)")
-
-    # Final tally of goblins defeated
+    
     print(f"\nTotal goblins defeated: {defeated_goblins} / {len(goblins)}")
     print(f"Total rounds fought: {rounds}")
     print(f"\nTotal damage dealt: {total_damage}")
+    
+    if hero.is_alive():
+        print("The deadly Smaug has flew into the arena!")
+        boss=Boss("Smaug")
+        while hero.is_alive() and boss.is_alive():
+            rounds=0
+            damage=hero.strike()
+            boss.take_damage(damage)
+            damage=boss
+            damage=boss.attack()
+            hero.receive_damage(damage)
+            if rounds > 10:
+                boss.health=0
+                print("Smaug has been struck in the heart!")
+            else:rounds=rounds+1
+    if hero.is_alive():
+        print(f"\nThe hero has defeated SMAUG!!! ༼ ᕤ◕◡◕ ༽ᕤ")
+    else:
+        print(f"\nThe hero has lost to the legendary SMAUG")       
+            
+    # Final tally of goblins defeated
+
 
 if __name__ == "__main__":
     main()
